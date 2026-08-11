@@ -51,12 +51,19 @@ function CreateLead() {
         navigate("/leads");
       }, 1000);
     } catch (err) {
-      setError(
-        err.response?.data?.detail ||
-        "Failed to create lead"
-      );
-    } finally {
-      setLoading(false);
+    const detail = err.response?.data?.detail;
+
+      if (Array.isArray(detail)) {
+        setError(
+          detail
+            .map((error) => error.msg)
+            .join(", ")
+        );
+      } else {
+        setError(
+          detail || "Failed to create lead"
+        );
+      }
     }
   };
 

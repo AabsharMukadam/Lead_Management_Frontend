@@ -62,11 +62,16 @@ function EditLead() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    setLoading(true);
-    setError("");
-    setSuccess("");
+  if (!formData.full_name.trim()) {
+    setError("Full Name is required.");
+    return;
+  }
+
+  setLoading(true);
+  setError("");
+  setSuccess("");
 
     try {
       const response = await updateLead(
@@ -79,14 +84,21 @@ function EditLead() {
       setTimeout(() => {
         navigate("/leads");
       }, 1000);
-    } catch (err) {
-      setError(
-        err.response?.data?.detail ||
-          "Failed to update lead"
-      );
-    } finally {
-      setLoading(false);
-    }
+   } catch (err) {
+  const detail = err.response?.data?.detail;
+
+  if (Array.isArray(detail)) {
+    setError(
+      detail
+        .map((error) => error.msg)
+        .join(", ")
+    );
+  } else {
+    setError(
+      detail || "Failed to update lead"
+    );
+  }
+}
   };
 
   if (pageLoading) {
