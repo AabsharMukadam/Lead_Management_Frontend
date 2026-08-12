@@ -1,33 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Header() {
-  const navigate = useNavigate();
-
-  const userData = localStorage.getItem("user");
-
-  let user = null;
-
-  try {
-    user = userData ? JSON.parse(userData) : null;
-  } catch (error) {
-    console.error("Invalid user data in localStorage");
-    localStorage.removeItem("user");
-  }
+  const { currentUser, logout } = useAuth();
 
   const userName =
-    user?.full_name ||
-    user?.name ||
-    user?.email ||
+    currentUser?.full_name ||
+    currentUser?.name ||
+    currentUser?.email ||
     "User";
 
-  const userEmail = user?.email || "";
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    navigate("/login");
-  };
+  const userEmail = currentUser?.email || "";
 
   return (
     <header className="bg-white border-bottom shadow-sm">
@@ -74,7 +56,7 @@ function Header() {
             {/* Logout */}
             <button
               className="btn btn-outline-danger btn-sm px-3"
-              onClick={handleLogout}
+              onClick={logout}
             >
               Logout
             </button>

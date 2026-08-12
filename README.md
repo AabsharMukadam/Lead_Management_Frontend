@@ -1,148 +1,169 @@
-# Lead Management System - Frontend
+# 🚀 CRM Lead Management System – Frontend
 
-A React-based frontend for a full-stack CRM Lead Management System.
+A modern and responsive **CRM Lead Management System frontend** built using **React.js, Vite, Axios, React Router, and Bootstrap**.
 
-The application connects to a FastAPI backend and MongoDB database to provide authentication, lead management, user management, filtering, sorting, pagination, and dashboard statistics.
+This application provides a complete frontend interface for managing CRM leads, users, authentication, profiles, and role-based navigation. It communicates with a **FastAPI backend** through REST APIs and uses **JWT authentication** for secure access to protected resources.
 
 ---
 
-## 🚀 Features
+# 📌 Table of Contents
 
-### Authentication
+- [📖 Project Overview](#-project-overview)
+- [🎯 Project Objectives](#-project-objectives)
+- [✨ Features](#-features)
+- [🔐 Authentication Features](#-authentication-features)
+- [👤 User Profile](#-user-profile)
+- [🛡️ Role-Based UI](#️-role-based-ui)
+- [📊 Lead Management](#-lead-management)
+- [🔄 Authentication Flow](#-authentication-flow)
+- [🔒 API Authentication](#-api-authentication)
+- [⚠️ 401 Unauthorized Handling](#️-401-unauthorized-handling)
+- [🛣️ Frontend Routes](#️-frontend-routes)
+- [🧱 Technology Stack](#-technology-stack)
+- [📁 Project Structure](#-project-structure)
+- [⚙️ Environment Configuration](#️-environment-configuration)
+- [📦 Installation](#-installation)
+- [▶️ Running the Application](#️-running-the-application)
+- [🔑 Login](#-login)
+- [👥 User Registration](#-user-registration)
+- [📈 Dashboard](#-dashboard)
+- [👤 Profile Page](#-profile-page)
+- [👨‍💼 User Management](#-user-management)
+- [📋 Lead Management](#-lead-management-1)
+- [➕ Create Lead](#-create-lead)
+- [✏️ Edit Lead](#️-edit-lead)
+- [🗑️ Delete Lead](#️-delete-lead)
+- [🔎 Search Leads](#-search-leads)
+- [🎯 Filter Leads](#-filter-leads)
+- [↕️ Sorting](#️-sorting)
+- [📄 Pagination](#-pagination)
+- [🚪 Logout](#-logout)
+- [⏳ Loading State](#-loading-state)
+- [🔐 Protected Routes](#-protected-routes)
+- [📡 Backend Integration](#-backend-integration)
+- [🧪 Testing](#-testing)
+- [✅ Authentication Testing](#-authentication-testing)
+- [🐛 Error Handling](#-error-handling)
+- [📱 Responsive Design](#-responsive-design)
+- [🔄 Application Flow](#-application-flow)
+- [📊 Project Status](#-project-status)
+- [🚧 Future Improvements](#-future-improvements)
+- [📚 Learning Outcomes](#-learning-outcomes)
+- [👨‍💻 Developer](#-developer)
 
-- User registration
-- User login
-- JWT authentication
-- Secure token storage using browser local storage
-- Protected routes
-- Automatic authentication handling
-- Logout functionality
-- Session expiration handling
+---
 
-### Dashboard
+# 📖 Project Overview
 
-- Total leads count
-- New leads count
-- Contacted leads count
-- Qualified leads count
-- Won leads count
-- Lost leads count
-- High-priority leads count
-- Recent leads table
-- Refresh dashboard data
+The **CRM Lead Management System** is a web-based application designed to manage and organize business leads.
 
-### Lead Management
+The frontend provides an interactive user interface where authenticated users can:
 
-- View all leads
-- Search leads by:
-  - Name
-  - Email
-  - Company
-  - Phone
-- Filter leads by:
-  - Status
-  - Priority
-  - Source
-- Sort leads by:
-  - Created date
-  - Updated date
-  - Name
-  - Company
-  - Priority
-  - Status
-- Ascending and descending sorting
-- Pagination
-- Create new leads
-- Edit existing leads
+- Login securely
+- Logout securely
+- View the CRM dashboard
+- View leads
+- Create leads
+- Edit leads
 - Delete leads
-- Delete confirmation
-- Loading states
-- Success and error messages
-- Frontend validation
+- Search leads
+- Filter leads
+- Sort leads
+- Navigate through paginated lead records
+- View their profile
+- View users
+- Access role-specific navigation
+- Manage their authentication session
 
-### User Management
-
-- View registered users
-- Display user name
-- Display user email
-- Display user role
-- Role badges for administrators and regular users
-
-### User Profile
-
-- Display logged-in user's email
-- Display logged-in user's role
+The frontend communicates with the FastAPI backend using REST APIs.
 
 ---
 
-## 🛠️ Tech Stack
+# 🎯 Project Objectives
 
-- React
-- Vite
-- JavaScript
-- Axios
-- React Router
-- Bootstrap
-- FastAPI
-- MongoDB Atlas
-- JWT Authentication
+The main objectives of the project are:
+
+- Build a professional CRM frontend
+- Implement JWT-based authentication
+- Create protected application routes
+- Centralize authentication state
+- Connect React with FastAPI
+- Implement CRUD operations for leads
+- Implement search, filtering, sorting and pagination
+- Create a reusable application layout
+- Implement role-based UI
+- Display current user information
+- Handle expired authentication sessions
+- Provide a clean and responsive user experience
 
 ---
 
-## 📂 Project Structure
+# ✨ Features
+
+## 🔐 Authentication
+
+- User login
+- User registration interface
+- JWT token authentication
+- Authentication context using React Context API
+- Persistent authentication state
+- Automatic dashboard redirection after login
+- Automatic login redirection for unauthenticated users
+- Logout functionality
+- Authentication loading state
+- Current user retrieval
+- Session expiration handling
+- Centralized API authentication
+
+---
+
+## 📊 Dashboard
+
+The dashboard provides an overview of the CRM application.
+
+It includes:
+
+- Application header
+- Current user information
+- Sidebar navigation
+- CRM navigation
+- Lead management access
+- User management access for administrators
+- Profile access
+- Logout functionality
+
+---
+
+## 📋 Lead Management
+
+Users can manage CRM leads through the frontend.
+
+Lead functionality includes:
+
+- View leads
+- Create leads
+- Edit leads
+- Delete leads
+- Search leads
+- Filter leads
+- Sort leads
+- Pagination
+
+---
+
+## 👤 User Profile
+
+The profile page displays the currently authenticated user's information.
+
+Profile information includes:
+
+- Full Name
+- Email
+- Phone Number
+- Role
+- Account Status
+
+The information is retrieved from the backend using:
 
 ```text
-Lead_Management_Frontend/
-│
-├── public/
-│
-├── src/
-│   │
-│   ├── api/
-│   │
-│   ├── assets/
-│   │
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── Layout.jsx
-│   │   ├── LeadCard.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── ProtectedRoute.jsx
-│   │   └── Sidebar.jsx
-│   │
-│   ├── constants/
-│   │   └── leadOptions.js
-│   │
-│   ├── pages/
-│   │   ├── CreateLead.jsx
-│   │   ├── Dashboard.jsx
-│   │   ├── EditLead.jsx
-│   │   ├── Leads.jsx
-│   │   ├── Login.jsx
-│   │   ├── Profile.jsx
-│   │   ├── Register.jsx
-│   │   └── Users.jsx
-│   │
-│   ├── services/
-│   │   ├── api.js
-│   │   ├── authService.js
-│   │   ├── leadService.js
-│   │   └── userService.js
-│   │
-│   ├── styles/
-│   │   ├── auth.css
-│   │   ├── dashboard.css
-│   │   └── leads.css
-│   │
-│   ├── utils/
-│   │   └── auth.js
-│   │
-│   ├── App.jsx
-│   └── main.jsx
-│
-├── .env
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── vite.config.js
-└── README.md
+GET /api/v1/users/me

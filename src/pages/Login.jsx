@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
-import { loginUser } from "../services/authService";
-import { saveToken } from "../utils/auth";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
-  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const [searchParams] = useSearchParams();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState(
+  searchParams.get("message") || ""
+  );
 
   const [loading, setLoading] = useState(false);
 
@@ -26,34 +29,27 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    setLoading(true);
+  setLoading(true);
+  setError("");
 
-    try {
-    const response = await loginUser(
-        formData.email,
-        formData.password
+  try {
+    await login(
+      formData.email,
+      formData.password
     );
-    console.log("LOGIN RESPONSE:", response);
-    console.log("USER:", response.user);
-
-    saveToken(response.access_token);
-
-    console.log("Token and user information saved");
-
-    navigate("/dashboard");
-    } catch (err) {
+  } catch (err) {
     console.log("ERROR:", err);
     console.log("Response:", err.response);
 
     setError(
-        err.response?.data?.detail || err.message
+      err.response?.data?.detail || err.message
     );
-    }finally {
+  } finally {
     setLoading(false);
-    }
-  };
+  }
+};
 
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">

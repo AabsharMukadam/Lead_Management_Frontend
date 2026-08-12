@@ -1,12 +1,17 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Sidebar() {
+  const { currentUser } = useAuth();
+
   const navLinkClass = ({ isActive }) =>
     `nav-link rounded px-3 py-2 mb-2 ${
       isActive
         ? "bg-primary text-white"
         : "text-dark"
     }`;
+
+  const isAdmin = currentUser?.role === "admin";
 
   return (
     <aside
@@ -45,12 +50,14 @@ function Sidebar() {
           Create Lead
         </NavLink>
 
-        <NavLink
-          to="/users"
-          className={navLinkClass}
-        >
-          Users
-        </NavLink>
+        {isAdmin && (
+          <NavLink
+            to="/users"
+            className={navLinkClass}
+          >
+            Users
+          </NavLink>
+        )}
 
         <NavLink
           to="/profile"
